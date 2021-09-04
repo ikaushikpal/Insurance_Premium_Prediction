@@ -1,9 +1,9 @@
 # VS-Code
-*/.vscode
+.vscode/
 
 # jovian.AI
 
-*/.jovianrc
+*.jovianrc
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
