@@ -1,3 +1,10 @@
+# VS-Code
+*/.vscode
+
+# jovian.AI
+
+*/.jovianrc
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
