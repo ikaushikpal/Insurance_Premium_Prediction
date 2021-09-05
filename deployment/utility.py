@@ -37,6 +37,32 @@ def user_input_features():
 
     return: pd.DataFrame Object
     '''
+    inputFile = st.sidebar.file_uploader("Upload DataSet", type=['csv', 'xlsx', 'xls'])
+    cols = ['age', 'sex', 'bmi', 'children', 'smoker', 'region']
+
+
+    try:
+        if inputFile is not None:
+            # validing whether it a csv or excel file
+
+            fileName = inputFile.name
+            if fileName[-3:] == 'csv':
+                df = pd.read_csv(inputFile)
+            
+            else:
+                df = pd.read_excel(inputFile)
+
+            if df.shape[1]!=len(cols) or list(df.columns) != cols:
+                st.error(f"Given DataSet's columns be be {cols}\n\nTry Again with correct dataset")
+            
+            else:
+                return df
+
+    except Exception as e:
+        st.exception(e)
+
+    st.sidebar.header('User Input Parameters')
+
     age = st.sidebar.number_input('Age ', min_value=18, max_value=64, value=18)
 
     sex = st.sidebar.selectbox('Sex', ['male', 'female'])
@@ -64,7 +90,7 @@ def user_input_features():
 
 
 def scaleDF(df, parameters):
-"""Before We feed data to our random forest regressor model we need to scale
+    """Before We feed data to our random forest regressor model we need to scale
     down values and need to perform box-cox and exponential transformation.
 
     Parameters
@@ -118,4 +144,9 @@ def predictTarget(X, parameters):
 
     y_pred = scipy.special.inv_boxcox(y_pred, 0.04364902969059508) # reverse box-cox 
 
-    return y_pred[0]
+    if y_pred.shape[0] == 1:
+        return y_pred[0]
+    
+    else:
+        return y_pred
+    
