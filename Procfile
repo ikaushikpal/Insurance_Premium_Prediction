@@ -1,1 +1,1 @@
-web: sh setup.sh && streamlit run "deployment/Inssurance Premium Prediction.py"
+web: sh cd deployment && setup.sh && streamlit run "Inssurance Premium Prediction.py"
