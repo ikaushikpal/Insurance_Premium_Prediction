@@ -1,1 +1,2 @@
-# Insurance-_Premium_Prediction
+# Insurance Premium Prediction Project
+
